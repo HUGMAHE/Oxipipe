@@ -22,6 +22,10 @@
 
 ---
 
+<p align="center">
+  <img src="public/screenshot-pipeline.png" alt="Oxipipe Visual Pipeline" width="100%" />
+</p>
+
 * **Fast:** Powered by Rust and Apache DataFusion for in-memory, multi-threaded data operations.
 * **Visual:** Drag-and-drop node canvas to build data transformation pipelines effortlessly.
 * **Interactive:** Built-in DataViz studio supporting 20+ chart types (Line, Bar, Scatter, Sankey, Heatmap, Radar, etc.).
