@@ -1,0 +1,28 @@
+# Node / Vite
+node_modules
+dist
+dist-ssr
+*.local
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Rust / Tauri
+src-tauri/target
+src-tauri/gen
+src-tauri/**/*.rs.bk
+
+# Data / Output scratch files
+*.csv
+*.parquet
+*.json
+*.oxi
+!package.json
+!tsconfig.json
+!tsconfig.node.json

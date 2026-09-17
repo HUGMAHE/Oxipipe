@@ -1,0 +1,50 @@
+[package]
+name = "oxipipe"
+version = "0.1.0"
+description = "Oxipipe — Visual Data Pipeline Engine"
+authors = ["Oxipipe Team"]
+edition = "2021"
+
+[lib]
+name = "oxipipe_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[[bin]]
+name = "oxipipe"
+path = "src/main.rs"
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+tauri = { version = "2", features = [] }
+tauri-plugin-shell = "2"
+tauri-plugin-dialog = "2"
+
+# Data engine
+datafusion = { version = "43", features = ["avro"] }
+arrow = { version = "53", features = ["prettyprint"] }
+tokio = { version = "1", features = ["full"] }
+
+# Extra source formats
+calamine = { version = "0.36.0", features = ["chrono"] }
+rusqlite = { version = "0.37", features = ["bundled"] }
+
+
+# Serialization
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+
+# Error handling
+anyhow = "1"
+thiserror = "1"
+
+# System info for perf metrics
+sysinfo = "0.31"
+
+[profile.release]
+panic = "abort"
+codegen-units = 1
+lto = true
+opt-level = "s"
+strip = true
