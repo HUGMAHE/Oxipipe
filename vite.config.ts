@@ -29,10 +29,9 @@ export default defineConfig(async () => ({
   },
   envPrefix: ["VITE_", "TAURI_ENV_*"],
   build: {
-    target:
-      process.env.TAURI_ENV_PLATFORM === "windows"
-        ? "chrome105"
-        : "safari13",
+    // Tauri's embedded browser is always Chromium-based (WebKit2GTK on Linux, but Chrome on Win/Mac)
+    // hyparquet uses BigInt literals (1n) which need chrome67+ — chrome105 covers all Tauri targets
+    target: "chrome105",
     minify: !process.env.TAURI_ENV_DEBUG ? "esbuild" : false,
     sourcemap: !!process.env.TAURI_ENV_DEBUG,
   },

@@ -122,7 +122,7 @@ let draggedNodeType: string | null = null;
 // ─────────────────────────────────────────────────────────────────────────────
 // App
 // ─────────────────────────────────────────────────────────────────────────────
-export default function App() {
+export default function App({ onBack }: { onBack?: () => void } = {}) {
   const [nodes, setNodes, onNodesChange] = useNodesState<any>([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [activeTab, setActiveTab] = useState<ActiveTab>("preview");
@@ -485,6 +485,21 @@ export default function App() {
       {/* ── Top Bar ─────────────────────────────────────────────────── */}
       <header className="topbar">
         <div className="topbar-logo" style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          {onBack && (
+            <button
+              type="button"
+              onClick={onBack}
+              style={{
+                background: "none", border: "1px solid #2a2a2a",
+                borderRadius: 6, color: "#888", fontSize: 12,
+                padding: "3px 9px", cursor: "pointer",
+                display: "flex", alignItems: "center", gap: 5,
+              }}
+              title="Back to Home"
+            >
+              ← Home
+            </button>
+          )}
           <IconOxipipeLogo size={26} />
           
           {/* File Dropdown Menu */}

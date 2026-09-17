@@ -1,6 +1,8 @@
-import React, { Component, type ErrorInfo, type ReactNode } from "react";
+import React, { Component, useState, type ErrorInfo, type ReactNode } from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
+import HomeScreen from "./HomeScreen";
+import DataVizApp from "./dataviz/DataVizApp";
 import "./index.css";
 import "reactflow/dist/style.css";
 
@@ -55,7 +57,7 @@ class GlobalErrorBoundary extends Component<Props, State> {
             style={{
               marginTop: 16,
               padding: "8px 16px",
-              background: "#1F96F3",
+              background: "#e06927",
               color: "#fff",
               border: "none",
               borderRadius: 4,
@@ -72,10 +74,32 @@ class GlobalErrorBoundary extends Component<Props, State> {
   }
 }
 
+// ── Top-level router ──────────────────────────────────────────────────────────
+type AppModule = "home" | "etl" | "dataviz";
+
+function RootApp() {
+  const [module, setModule] = useState<AppModule>("home");
+
+  if (module === "etl") {
+    return <App onBack={() => setModule("home")} />;
+  }
+  if (module === "dataviz") {
+    return <DataVizApp onBack={() => setModule("home")} />;
+  }
+  return (
+    <HomeScreen
+      onSelectETL={() => setModule("etl")}
+      onSelectViz={() => setModule("dataviz")}
+    />
+  );
+}
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <GlobalErrorBoundary>
-      <App />
+      <RootApp />
     </GlobalErrorBoundary>
   </React.StrictMode>
 );
+
+

@@ -62,6 +62,20 @@ fn load_pipeline_file(path: String) -> Result<String, String> {
     std::fs::read_to_string(&path).map_err(|e| format!("Failed to read .oxi file: {}", e))
 }
 
+/// Read a file as UTF-8 text — used by DataViz module (no ETL engine dependency)
+#[tauri::command]
+fn read_file_text(path: String) -> Result<String, String> {
+    std::fs::read_to_string(&path)
+        .map_err(|e| format!("Failed to read file '{}': {}", path, e))
+}
+
+/// Read a file as raw bytes — used by DataViz module for Parquet files
+#[tauri::command]
+fn read_file_bytes(path: String) -> Result<Vec<u8>, String> {
+    std::fs::read(&path)
+        .map_err(|e| format!("Failed to read file '{}': {}", path, e))
+}
+
 /// Health-check — returns engine version info
 #[tauri::command]
 fn engine_info() -> serde_json::Value {
@@ -91,6 +105,8 @@ pub fn run() {
             generate_docker_export,
             save_pipeline_file,
             load_pipeline_file,
+            read_file_text,
+            read_file_bytes,
         ])
         .run(tauri::generate_context!())
         .expect("error while running Oxipipe");
