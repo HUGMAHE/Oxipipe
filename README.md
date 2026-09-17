@@ -5,7 +5,7 @@
 <h1 align="center">Oxipipe</h1>
 
 <p align="center">
-  <strong>High-performance visual data processing (ETL) and data visualization desktop application.</strong>
+  <strong>Node-based visual data processing (ETL) and data visualization desktop application.</strong>
 </p>
 
 <p align="center">
